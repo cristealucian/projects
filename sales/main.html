@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+
+    <style>
+
+        body {
+            background-color: black;
+            color: white;
+        }
+        .diff {
+            font-size: 500px;
+            display: inline-block;
+        }
+
+    </style>
+
+</head>
+<body class="body">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+
+    function myCall() {
+        var main_url = 'messages.php';
+        $.ajax({
+            url: main_url
+        })
+                .done(function(msg) {
+                    $("#demo").html(msg);
+                });
+
+
+        var div = $("#demo");
+
+        var y_height = div.innerHeight();
+        var x_width = div.innerWidth();
+
+        var max_height = $(window).height() - y_height;
+        var max_width = $(window).width() - x_width;
+
+        var rand_Y = Math.floor(Math.random()* max_height);
+        var rand_X = Math.floor(Math.random()* max_width);
+
+        if ((max_height >= rand_Y ) && (max_width >= rand_X)) {
+            $('#demo').css({
+                position: 'absolute',
+                top: rand_Y,
+                left: rand_X
+            });
+        }
+    }
+
+    setInterval(myCall, 20000);
+
+    myCall();
+</script>
+
+<div id="demo" class="diff"></div>
+
+</body>
+</html>
